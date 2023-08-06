@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eea6a782836ffe49883b2d444ec0cd8, type: 3}
+  m_Name: Cave
+  m_EditorClassIdentifier: 
+  _icon: {fileID: 21300000, guid: e19a581ab0d9fe94da644b01602b2736, type: 3}
+  _cost: 15
+  _isBought: 0
+  _pipe: {fileID: 5809301237080218912, guid: 3bfc8effcd88a144ea666b4465df2d63, type: 3}
+  _background: {fileID: -2620280206375611448, guid: 34e1c6fdbce68f94b8acbe132a1c8316, type: 3}
+  _floor: {fileID: 4641749226759167343, guid: e92efb7ef35d5894db9eb54bb2af2a35, type: 3}

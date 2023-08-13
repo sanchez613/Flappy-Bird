@@ -19,16 +19,16 @@ public class ShopItemView : MonoBehaviour
 
     private void OnEnable()
     {
-        _sellButton.onClick.AddListener(OnSellButtonClick);
-        _selectButton.onClick.AddListener(OnSelectButtonClick);
-        _sellButton.onClick.AddListener(TryLockItem);
+        Invoke(nameof(DisplayButton), 0);        
     }
 
     private void OnDisable()
     {
-        _sellButton.onClick.RemoveListener(OnSellButtonClick);
-        _selectButton.onClick.RemoveListener(OnSelectButtonClick);
-        _sellButton.onClick.RemoveListener(TryLockItem);        
+        _sellButton.onClick.RemoveAllListeners();
+        _selectButton.onClick.RemoveAllListeners();
+        _sellButton.gameObject.SetActive(false);
+        _cost.gameObject.SetActive(false);
+        _selectButton.gameObject.SetActive(false);
     }
 
     public void Render(ShopItem item)
@@ -39,19 +39,36 @@ public class ShopItemView : MonoBehaviour
         TryLockItem();
     }
 
+    private void DisplayButton() 
+    {
+        if (_item.IsBought)
+        {
+            _selectButton.gameObject.SetActive(true);
+            _selectButton.onClick.AddListener(OnSelectButtonClick);
+        }
+        else
+        {
+            _sellButton.gameObject.SetActive(true);
+            _cost.gameObject.SetActive(true);
+            _sellButton.onClick.AddListener(OnSellButtonClick);
+            _sellButton.onClick.AddListener(TryLockItem);
+        }
+    }
+
     private void TryLockItem()
     {
         if (_item.IsBought)
         {
             _sellButton.gameObject.SetActive(false);
             _cost.gameObject.SetActive(false);
-            _sellButton.gameObject.SetActive(true);
+            _selectButton.gameObject.SetActive(true);
         }
     }
 
     private void OnSellButtonClick()
     {
         SellButtonClick?.Invoke(_item, this);
+        TryLockItem();
     }
 
     private void OnSelectButtonClick()

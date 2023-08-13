@@ -9,17 +9,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private ShopItemView _itemView;
     [SerializeField] private GameObject _itemContainer;
 
-    private void OnEnable()
-    {
-        _itemView.SelectButtonClick += OnSelectButtonClick;
-    }
-
-    private void OnDisable()
-    {
-        _itemView.SelectButtonClick -= OnSelectButtonClick;
-    }
-
-    private void Start()
+    private void Awake()
     {
         for (int i = 0; i < _shopItems.Count; i++)
         {
@@ -30,8 +20,9 @@ public class Shop : MonoBehaviour
     private void AddItem(ShopItem shopItem)
     {
         var view = Instantiate(_itemView, _itemContainer.transform);
-        view.SellButtonClick += OnSellButtoClick;
         view.Render(shopItem);
+        view.SellButtonClick += OnSellButtoClick;
+        view.SelectButtonClick += OnSelectButtonClick;
     }
 
     private void OnSellButtoClick(ShopItem item, ShopItemView itemView)
@@ -46,11 +37,7 @@ public class Shop : MonoBehaviour
 
     private void TrySellItem(ShopItem item, ShopItemView itemView)
     {
-        if(item.Cost <= _player.Money)
-        {
-            _player.BuyItem(item);
-            item.Buy();
+        if (_player.TryBuyItem(item))
             itemView.SellButtonClick -= OnSellButtoClick;
-        }
     }
 }

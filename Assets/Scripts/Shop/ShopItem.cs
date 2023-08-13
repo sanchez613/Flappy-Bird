@@ -7,7 +7,7 @@ public class ShopItem : ScriptableObject
 {
     [SerializeField] private Sprite _icon;
     [SerializeField] private int _cost;
-    [SerializeField] private bool _isBought = false;
+    [SerializeField] private bool _isBought;
 
     public bool IsBought => _isBought;
     public int Cost => _cost;

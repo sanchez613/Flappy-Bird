@@ -7,21 +7,29 @@ public class Player : MonoBehaviour
 {
     private Environment _currentEnvironment;
     private Skin _currentSkin;
+    private Wallet _wallet = new();
 
-    public int Money { get; private set; } = 200;
+    public int Money => _wallet.Money;
 
     public event UnityAction<Skin> SkinChange;
     public event UnityAction<Environment> EnvironmentChange;
 
     public void AddMoney(int money)
     {
-        Money += money;
+        if(money > 0)
+            _wallet.AddMoney(money);
     }
 
-    public void BuyItem(ShopItem item)
+    public bool TryBuyItem(ShopItem item)
     {
-        Money -= item.Cost;
-        SetItem(item);
+        if (_wallet.Pay(item.Cost))
+        {
+            item.Buy();
+            SetItem(item);
+            return true;
+        }
+
+        return false;
     }
 
     public void SetItem(ShopItem item)

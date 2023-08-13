@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _icon: {fileID: 1851993845, guid: 9c0a2bef6de9e8449856e766ec1908f3, type: 3}
   _cost: 0
-  _isBought: 1
+  _isBought: 0
   _renderer: {fileID: 8112999968691529992, guid: 0c526e6fee06756439b5c533d84898a2, type: 3}
